@@ -1,0 +1,13 @@
+{
+  "name": "sistema-oficina",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler pages dev",
+    "db:local": "wrangler d1 execute oficina-db --local --file=./db/schema.sql",
+    "db:remote": "wrangler d1 execute oficina-db --remote --file=./db/schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

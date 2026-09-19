@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wireframe completo — Sistema da Oficina</title>
+<style>
+  :root{--bg:#f2f2f2;--line:#bdbdbd;--mid:#9e9e9e;--dark:#555;--ink:#222;--white:#fff;--note:#fff6c9;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+  .ph{background:#e0e0e0;border:1px dashed var(--mid);display:flex;align-items:center;justify-content:center;color:var(--dark);font-size:12px;text-align:center}
+  .box{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:14px}
+  .btn{display:inline-block;border:1px solid var(--dark);background:var(--dark);color:#fff;padding:7px 12px;border-radius:4px;font-size:13px;cursor:pointer;white-space:nowrap}
+  .btn.sec{background:#fff;color:var(--dark)}
+  .input{border:1px solid var(--line);background:#fff;padding:8px 10px;border-radius:4px;color:var(--mid);font-size:13px}
+  .badge{display:inline-block;border:1px solid var(--mid);border-radius:10px;padding:2px 8px;font-size:11px;background:#eee;white-space:nowrap}
+  .note{background:var(--note);border:1px solid #e6d77a;border-radius:4px;padding:8px 10px;font-size:12px;line-height:1.45}
+  .tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:3px;margin-right:6px;vertical-align:1px}
+  .tag.mvp{background:#222;color:#fff}.tag.v2{background:#fff;border:1px solid #999;color:#666}
+  h1{font-size:20px;font-weight:600}
+  h2{font-size:14px;font-weight:600;margin-bottom:10px}
+  .sub{font-size:12px;color:var(--dark)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid #e3e3e3}
+  th{background:#e8e8e8;font-weight:600;font-size:12px;white-space:nowrap}
+  .scroll{overflow-x:auto}
+  .page{display:none}.page.on{display:block}
+  .app{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+  .side{background:#3a3a3a;color:#ddd;padding:14px 10px;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .logo{display:flex;gap:8px;align-items:center;margin-bottom:14px;cursor:pointer}
+  .logo .ph{width:32px;height:32px;background:#666;border-color:#888;color:#ddd}
+  .navi{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-radius:4px;cursor:pointer;margin-bottom:1px;font-size:13px}
+  .navi:hover{background:#4a4a4a}.navi.on{background:#888;color:#fff}
+  .navi .n{font-size:10px;background:#666;border-radius:8px;padding:0 6px}
+  .navgroup{font-size:11px;color:#999;margin:12px 10px 4px}
+  .main{display:flex;flex-direction:column;min-width:0}
+  .top{background:#fff;border-bottom:1px solid var(--line);padding:10px 20px;display:flex;gap:10px;align-items:center;position:sticky;top:0;z-index:3}
+  .top .input{flex:1;max-width:380px}
+  .top .r{margin-left:auto;display:flex;gap:6px;align-items:center}
+  .content{padding:20px;display:flex;flex-direction:column;gap:16px}
+  .head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .kpi .v{font-size:22px;font-weight:700;margin-top:6px}.kpi .l{font-size:12px;color:var(--dark)}
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .acts{display:flex;gap:4px}
+  .ico{min-width:26px;height:26px;padding:0 5px;border:1px solid var(--line);border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;color:var(--dark);background:#fff;cursor:pointer}
+  .form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .form label{font-size:12px;color:var(--dark);display:block;margin-bottom:4px}
+  .form .input{width:100%}
+  .full{grid-column:1/-1}
+  .steps{display:flex;gap:6px;flex-wrap:wrap}
+  .steps span{border:1px solid var(--line);background:#fff;padding:6px 10px;border-radius:14px;font-size:12px}
+  .steps span.on{background:var(--dark);color:#fff;border-color:var(--dark)}
+  .totals{display:flex;justify-content:flex-end;gap:24px;padding-top:10px}
+  .bars{display:flex;align-items:flex-end;gap:10px;height:140px;padding:10px;border-bottom:1px solid var(--line)}
+  .bars div{flex:1;background:#bbb;border-radius:3px 3px 0 0}
+  .bars div:nth-child(2n){background:#8f8f8f}
+  .blabels{display:flex;gap:10px;padding:4px 10px;font-size:11px;color:var(--dark)}.blabels span{flex:1;text-align:center}
+  .alert{border:1px solid var(--line);border-left:4px solid var(--dark);border-radius:4px;padding:8px 10px;margin-bottom:8px;font-size:13px}
+  .alert small{display:block;color:var(--dark);font-size:11px}
+  .feed div{padding:7px 0;border-bottom:1px solid #eee;font-size:13px}.feed small{color:var(--mid);font-size:11px}
+  .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+  .cal div{background:#fff;border:1px solid #e3e3e3;border-radius:3px;min-height:62px;padding:4px;font-size:11px;color:var(--dark)}
+  .cal .h{min-height:auto;background:#e8e8e8;text-align:center;font-weight:600}
+  .cal .ev{display:block;background:#ddd;border-radius:2px;padding:1px 3px;margin-top:3px;color:var(--ink)}
+  .kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .col{background:#e8e8e8;border-radius:6px;padding:10px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:8px;margin-top:8px;font-size:13px}
+  .card small{display:block;color:var(--dark);font-size:11px;margin-top:3px}
+  .guide details{border-bottom:1px solid #e3e3e3;padding:10px 0}.guide summary{cursor:pointer;font-weight:600}
+  .guide p{margin-top:6px;color:var(--dark);font-size:13px;line-height:1.5}
+  .tabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+  .tabs span{padding:8px 12px;font-size:13px;border:1px solid transparent;border-bottom:0;border-radius:4px 4px 0 0}
+  .tabs span.on{background:#fff;border-color:var(--line);margin-bottom:-1px}
+  /* landing */
+  .land header{display:flex;justify-content:space-between;align-items:center;padding:16px 32px;background:#fff;border-bottom:1px solid var(--line)}
+  .land nav{display:flex;gap:18px;font-size:13px;color:var(--dark)}
+  .land .hero{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:50px 32px;align-items:center;max-width:1100px;margin:0 auto}
+  .land .hero h1{font-size:30px;line-height:1.2;margin-bottom:12px}
+  .land .sec{max-width:1100px;margin:0 auto;padding:30px 32px}
+  .land .sec > h2{font-size:20px;margin-bottom:14px}
+  .land footer{padding:24px 32px;text-align:center;font-size:12px;color:var(--dark);border-top:1px solid var(--line);background:#fff}
+  .login{min-height:calc(100vh - 40px);display:flex;align-items:center;justify-content:center;padding:20px}
+  .login .box{width:360px;display:flex;flex-direction:column;gap:10px;padding:26px}
+  /* mapa */
+  .mapbar{position:sticky;top:0;z-index:6;background:var(--ink);color:#fff;padding:8px 14px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px}
+  .mapbar button{background:#444;color:#fff;border:0;border-radius:3px;padding:5px 9px;font-size:12px;cursor:pointer}
+  .mapbar button.on{background:#fff;color:var(--ink)}
+  .mapbar .leg{margin-left:auto;display:flex;gap:10px;align-items:center}
+  .mapbar .top{position:static}
+  body.inapp .top{top:40px}
+  .modalbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);align-items:center;justify-content:center;padding:20px;z-index:10}
+  .modalbg .box{width:480px;max-height:90vh;overflow:auto}
+  @media(max-width:900px){.app{grid-template-columns:1fr}.side{display:none}.grid4,.grid3{grid-template-columns:1fr 1fr}.grid2,.form,.kanban,.land .hero{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="mapbar">
+  <button data-go="landing">Página institucional</button>
+  <button data-go="login">Login</button>
+  <button data-go="dash" class="on">Sistema (entrar)</button>
+  <span class="leg"><span><span class="tag mvp">MVP</span>teste em 3 dias</span><span><span class="tag v2">V2</span>depois</span></span>
+</div>
+
+<div id="root"></div>
+
+<div class="modalbg" id="modal"><div class="box">
+  <h2 id="mtitle">Novo</h2>
+  <div class="form" id="mform"></div>
+  <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px"><span class="btn sec" data-close>Cancelar</span><span class="btn" data-close id="msave">Salvar</span></div>
+</div></div>
+
+<script>
+/* ============ MAPA DO SISTEMA ============
+   §texto = badge de status */
+const MENU = [
+ ["Visão geral",["dash"]],
+ ["Clientes e veículos",["clientes","veiculos","agenda"]],
+ ["Operação",["os","diagnosticos","servicos"]],
+ ["Peças e estoque",["pecas","estoque","pedidos","fornecedores"]],
+ ["Equipe",["mecanicos","horas"]],
+ ["Financeiro",["orcamentos","faturas","pagamentos","despesas"]],
+ ["Pós-venda e tarefas",["garantias","lembretes","tarefas"]],
+ ["Análises",["relatorios","analises"]],
+ ["Sistema",["config","guia"]]
+];
+
+const L = { // páginas de lista (mesmo molde)
+ clientes:{nav:"Clientes",st:"mvp",sub:"86 cadastrados",btn:"Novo cliente",
+  note:"Lista de clientes. Clicar em \"ver\" abre a ficha com veículos e histórico.",
+  f:["Buscar por nome, telefone ou placa…"],
+  c:["Nome","Telefone","E-mail","Veículos","Última visita"],
+  r:[["Marcos Silva","(15) 99999-0000","marcos@email.com","2","18/09"],["Ana Souza","(15) 98888-1111","ana@email.com","1","17/09"],["Transportes Lima","(15) 3222-4444","frota@lima.com","5","17/09"]],
+  go:"cliente",fields:["Nome","Telefone / WhatsApp","E-mail","CPF / CNPJ","Endereço","Observações"]},
+ veiculos:{nav:"Veículos",st:"mvp",sub:"112 cadastrados",btn:"Novo veículo",
+  note:"Visão geral da frota atendida. No MVP os veículos também são cadastrados dentro da ficha do cliente; esta lista serve para buscar pela placa.",
+  f:["Buscar por placa ou modelo…","Todas as marcas ▾"],
+  c:["Placa","Marca / modelo","Ano","Km","Proprietário","Última OS"],
+  r:[["ABC1D23","VW Gol 1.0","2018","84.200","Marcos Silva","#1042"],["FGH4I56","Hyundai HB20","2020","52.300","Ana Souza","#1041"],["JKL7M89","Mercedes Accelo","2019","210.000","Transportes Lima","#1040"]],
+  fields:["Placa","Proprietário ▾","Marca","Modelo","Ano","Km atual","Cor","Chassi (opcional)"]},
+ os:{nav:"Ordens de serviço",st:"mvp",n:12,sub:"12 abertas",btn:"Nova OS",
+  note:"Principal tela de operação. Clicar em \"ver\" abre a OS completa.",
+  f:["Buscar por número, cliente ou placa…","Todos os status ▾","Mecânico ▾"],
+  c:["OS","Data","Cliente","Placa","Mecânico","Valor","Status"],
+  r:[["#1042","18/09","Marcos Silva","ABC1D23","João","R$ 640,00","§Em andamento"],["#1041","17/09","Ana Souza","FGH4I56","Pedro","R$ 380,00","§Aguardando peça"],["#1040","17/09","Transportes Lima","JKL7M89","João","R$ 2.300,00","§Aguardando aprovação"],["#1039","15/09","Carla Dias","MNO2P34","Pedro","R$ 210,00","§Concluída"]],
+  go:"osd"},
+ diagnosticos:{nav:"Diagnósticos",st:"v2",sub:"8 este mês",btn:"Novo diagnóstico",
+  note:"Registro técnico da inspeção (scanner, códigos de falha, fotos). Pode virar um orçamento com um clique.",
+  f:["Buscar por placa ou código…"],
+  c:["Data","Veículo","Cliente","Códigos de falha","Mecânico","Resultado"],
+  r:[["18/09","ABC1D23","Marcos Silva","P0301, P0420","João","§Gerou orçamento"],["16/09","QRS5T67","Paulo Reis","—","Pedro","§Sem defeito"]],
+  fields:["Veículo ▾","Mecânico ▾","Códigos de falha","Relato do cliente","Diagnóstico técnico","Fotos (upload)"]},
+ servicos:{nav:"Serviços",st:"mvp",sub:"24 cadastrados",btn:"Novo serviço",
+  note:"Catálogo com preço padrão, usado para montar a OS e o orçamento rapidamente.",
+  f:["Buscar serviço…","Todas as categorias ▾"],
+  c:["Serviço","Categoria","Tempo estimado","Valor hora","Preço padrão"],
+  r:[["Troca de óleo + filtro","§Manutenção","0,5 h","R$ 110,00","R$ 240,00"],["Troca de pastilhas dianteiras","§Freios","1,5 h","R$ 110,00","R$ 180,00"],["Alinhamento e balanceamento","§Suspensão","1 h","R$ 110,00","R$ 120,00"]],
+  fields:["Nome","Categoria ▾","Tempo estimado (h)","Valor hora","Preço padrão","Descrição"]},
+ pecas:{nav:"Peças",st:"v2",sub:"140 cadastradas",btn:"Nova peça",
+  note:"Catálogo de peças (o que existe). A quantidade em estoque fica na tela Estoque.",
+  f:["Buscar por nome ou código…","Categoria ▾"],
+  c:["Código","Peça","Categoria","Custo","Preço de venda","Fornecedor"],
+  r:[["PF-221","Pastilha de freio dianteira","§Freios","R$ 110,00","R$ 220,00","Auto Peças Sorocaba"],["FO-010","Filtro de óleo","§Motor","R$ 18,00","R$ 35,00","Distribuidora Leste"]],
+  fields:["Código","Nome","Categoria ▾","Custo","Preço de venda","Fornecedor ▾"]},
+ estoque:{nav:"Estoque",st:"v2",n:2,sub:"2 itens abaixo do mínimo",btn:"Ajustar estoque",
+  note:"Quantidade atual de cada peça, com alerta quando fica abaixo do mínimo. A baixa acontece automaticamente quando a peça entra numa OS.",
+  f:["Buscar peça…","Só abaixo do mínimo ▾"],
+  c:["Peça","Em estoque","Mínimo","Localização","Situação"],
+  r:[["Pastilha de freio dianteira","2","4","Prateleira A2","§Baixo"],["Filtro de óleo","0","6","Prateleira B1","§Sem estoque"],["Óleo 5W30 (L)","48","20","Depósito","§Ok"]],
+  fields:["Peça ▾","Tipo (entrada / saída / ajuste) ▾","Quantidade","Motivo"]},
+ pedidos:{nav:"Pedidos de peças",st:"v2",sub:"3 em aberto",btn:"Novo pedido",
+  note:"Compras feitas aos fornecedores. Ao marcar como recebido, o estoque é atualizado.",
+  f:["Buscar pedido…","Status ▾"],
+  c:["Pedido","Data","Fornecedor","Itens","Total","Status"],
+  r:[["PC-031","17/09","Auto Peças Sorocaba","3","R$ 540,00","§Enviado"],["PC-030","12/09","Distribuidora Leste","8","R$ 1.210,00","§Recebido"]],
+  fields:["Fornecedor ▾","Itens (peça + qtd)","Previsão de entrega","Observações"]},
+ fornecedores:{nav:"Fornecedores",st:"v2",sub:"9 cadastrados",btn:"Novo fornecedor",
+  note:"Contato de quem vende peças para a oficina.",
+  f:["Buscar fornecedor…"],
+  c:["Fornecedor","Contato","Telefone","E-mail","Pedidos"],
+  r:[["Auto Peças Sorocaba","Rita","(15) 3333-1000","vendas@aps.com","14"],["Distribuidora Leste","Carlos","(15) 3444-2000","pedidos@leste.com","22"]],
+  fields:["Nome","Contato","Telefone","E-mail","CNPJ","Observações"]},
+ mecanicos:{nav:"Mecânicos",st:"v2",sub:"4 ativos",btn:"Novo mecânico",
+  note:"Equipe da oficina. Serve para atribuir OS e medir produtividade.",
+  f:["Buscar…"],
+  c:["Nome","Especialidade","Telefone","OS no mês","Situação"],
+  r:[["João Pereira","Motor / injeção","(15) 97777-0000","22","§Ativo"],["Pedro Alves","Freios / suspensão","(15) 96666-0000","19","§Ativo"]],
+  fields:["Nome","Especialidade","Telefone","Valor hora (custo)","Situação ▾"]},
+ horas:{nav:"Apontamento de horas",st:"v2",sub:"Esta semana: 86 h",btn:"Registrar horas",
+  note:"Quanto tempo cada mecânico gastou em cada OS. Compara tempo real x tempo estimado do serviço.",
+  f:["Mecânico ▾","Período ▾"],
+  c:["Data","Mecânico","OS","Serviço","Estimado","Real"],
+  r:[["18/09","João","#1042","Troca de pastilhas","1,5 h","1,8 h"],["18/09","Pedro","#1041","Diagnóstico","1 h","0,7 h"]],
+  fields:["Mecânico ▾","OS ▾","Serviço ▾","Início","Fim"]},
+ orcamentos:{nav:"Orçamentos",st:"v2",sub:"5 aguardando resposta",btn:"Novo orçamento",
+  note:"Proposta antes do serviço. Aprovado pelo cliente → vira OS automaticamente. No MVP, o orçamento é só o status \"Orçamento\" dentro da OS.",
+  f:["Buscar…","Status ▾"],
+  c:["Nº","Data","Cliente","Veículo","Total","Status"],
+  r:[["ORC-088","18/09","Transportes Lima","JKL7M89","R$ 2.300,00","§Enviado"],["ORC-087","16/09","Paulo Reis","QRS5T67","R$ 890,00","§Aprovado"],["ORC-086","14/09","Lúcia Ramos","UVW8X90","R$ 450,00","§Recusado"]],
+  fields:["Cliente ▾","Veículo ▾","Itens (serviços e peças)","Validade","Observações"]},
+ faturas:{nav:"Faturas",st:"v2",sub:"3 em aberto",btn:"Nova fatura",
+  note:"Cobrança gerada a partir da OS concluída, com saldo a receber. No MVP, o pagamento fica dentro da própria OS.",
+  f:["Buscar…","Status ▾"],
+  c:["Fatura","Data","Cliente","Total","Saldo","Status"],
+  r:[["FAT-203","17/09","Transportes Lima","R$ 2.300,00","R$ 2.300,00","§Enviada"],["FAT-202","16/09","Marcos Silva","R$ 146,49","R$ 96,49","§Parcial"],["FAT-201","15/09","Carla Dias","R$ 210,00","R$ 0,00","§Paga"]],
+  fields:["OS ▾","Vencimento","Desconto","Observações"]},
+ pagamentos:{nav:"Pagamentos",st:"v2",sub:"Setembro: R$ 18.400",btn:"Registrar pagamento",
+  note:"Tudo que entrou no caixa, ligado a uma fatura/OS.",
+  f:["Período ▾","Forma ▾"],
+  c:["Data","Cliente","Referência","Forma","Valor"],
+  r:[["16/09","Marcos Silva","FAT-202","Pix","R$ 50,00"],["15/09","Carla Dias","FAT-201","Cartão","R$ 210,00"]],
+  fields:["Fatura ▾","Valor","Forma (Pix, dinheiro, cartão, boleto) ▾","Data"]},
+ despesas:{nav:"Despesas",st:"v2",sub:"Setembro: R$ 7.950",btn:"Nova despesa",
+  note:"Saídas do caixa (aluguel, energia, compras). Junto com Pagamentos, forma o lucro do mês.",
+  f:["Período ▾","Categoria ▾"],
+  c:["Data","Descrição","Categoria","Valor"],
+  r:[["10/09","Aluguel do galpão","§Fixo","R$ 4.500,00"],["12/09","Pedido PC-030","§Peças","R$ 1.210,00"]],
+  fields:["Descrição","Categoria ▾","Valor","Data","Comprovante (upload)"]},
+ garantias:{nav:"Garantias",st:"v2",sub:"31 vigentes",btn:"Nova garantia",
+  note:"Prazo de garantia de cada serviço/peça. Criada automaticamente quando a OS é concluída.",
+  f:["Buscar placa ou cliente…","Vigentes ▾"],
+  c:["OS","Cliente","Item","Início","Vence em","Situação"],
+  r:[["#1039","Carla Dias","Troca de embreagem","15/09","15/12","§Vigente"],["#0870","Paulo Reis","Bateria","02/03","02/09","§Vencida"]],
+  fields:["OS ▾","Item","Prazo (dias / km)","Condições"]},
+ lembretes:{nav:"Lembretes de manutenção",st:"v2",sub:"6 para esta semana",btn:"Novo lembrete",
+  note:"Avisa o cliente da próxima revisão (ex.: troca de óleo a cada 6 meses / 10.000 km). Gera retorno de clientes.",
+  f:["Período ▾","Enviados / pendentes ▾"],
+  c:["Previsto","Cliente","Veículo","Serviço","Canal","Status"],
+  r:[["22/09","Ana Souza","FGH4I56","Troca de óleo","WhatsApp","§Pendente"],["10/09","Marcos Silva","ABC1D23","Revisão 90 mil","E-mail","§Enviado"]],
+  fields:["Cliente ▾","Veículo ▾","Serviço","Data prevista ou km","Canal ▾"]}
+};
+
+const TITLES = {dash:"Dashboard",agenda:"Agendamentos",tarefas:"Tarefas da oficina",relatorios:"Relatórios",analises:"Análises",config:"Configurações",guia:"Guia de uso",cliente:"Ficha do cliente",osd:"Ordem de serviço"};
+const STAGE = {dash:"mvp",agenda:"v2",tarefas:"v2",relatorios:"v2",analises:"v2",config:"mvp",guia:"v2",cliente:"mvp",osd:"mvp"};
+const navName = id => L[id]?L[id].nav:TITLES[id];
+
+const esc = v => typeof v==="string" && v[0]==="§" ? `<span class="badge">${v.slice(1)}</span>` : v;
+const note = (id,t) => `<div class="note"><span class="tag ${STAGE[id]||L[id].st}">${(STAGE[id]||L[id].st).toUpperCase()}</span>${t}</div>`;
+const table = (c,r,go) => `<div class="scroll"><table><tr>${c.map(x=>`<th>${x}</th>`).join("")}<th></th></tr>${r.map(row=>`<tr>${row.map(x=>`<td>${esc(x)}</td>`).join("")}<td><div class="acts">${go?`<span class="ico" data-go="${go}">ver</span>`:""}<span class="ico">edit</span><span class="ico">del</span></div></td></tr>`).join("")}</table></div>`;
+const bars = (vals,labs) => `<div class="bars">${vals.map(v=>`<div style="height:${v}%"></div>`).join("")}</div><div class="blabels">${labs.map(l=>`<span>${l}</span>`).join("")}</div>`;
+
+function listPage(id){
+  const p=L[id];
+  return note(id,p.note)+
+  `<div class="head"><div><h1>${p.nav}</h1><div class="sub">${p.sub}</div></div><div class="filters"><span class="btn sec">Exportar CSV</span><span class="btn" data-modal="${id}">${p.btn}</span></div></div>
+  <div class="box"><div class="filters" style="margin-bottom:12px">${p.f.map((x,i)=>`<div class="input" ${i===0?'style="flex:1;min-width:200px"':''}>${x}</div>`).join("")}</div>${table(p.c,p.r,p.go)}</div>`;
+}
+
+const CUSTOM = {
+dash:()=> note("dash","Resumo do dia. MVP: indicadores, atalhos e OS em andamento. Gráficos, alertas de estoque e atividade recente entram na V2.")+`
+ <div class="head"><h1>Dashboard</h1><div class="sub">Sábado, 19 de setembro</div></div>
+ <div class="grid4">
+  <div class="box kpi"><div class="l">OS abertas</div><div class="v">12</div></div>
+  <div class="box kpi"><div class="l">Aguardando aprovação</div><div class="v">3</div></div>
+  <div class="box kpi"><div class="l">Faturado no mês</div><div class="v">R$ 18.400</div></div>
+  <div class="box kpi"><div class="l">A receber</div><div class="v">R$ 2.396</div></div>
+ </div>
+ <div class="grid2">
+  <div class="box"><h2>Faturamento (6 meses)</h2>${bars([30,42,38,55,60,72],["abr","mai","jun","jul","ago","set"])}</div>
+  <div class="box"><h2>OS por status</h2><div class="ph" style="height:170px">Gráfico de rosca<br>em andamento · concluída · aguardando</div></div>
+ </div>
+ <div class="box"><h2>Ações rápidas</h2><div class="filters">
+  <span class="btn" data-go="osd">Nova OS</span><span class="btn sec" data-modal="clientes">Novo cliente</span><span class="btn sec" data-modal="veiculos">Novo veículo</span><span class="btn sec" data-modal="agenda">Novo agendamento</span><span class="btn sec" data-modal="orcamentos">Novo orçamento</span><span class="btn sec" data-modal="pecas">Nova peça</span><span class="btn sec" data-modal="pedidos">Pedir peças</span><span class="btn sec" data-modal="pagamentos">Registrar pagamento</span><span class="btn sec" data-modal="despesas">Nova despesa</span></div></div>
+ <div class="grid2">
+  <div class="box"><h2>Alertas</h2>
+   <div class="alert">1 peça sem estoque<small>Filtro de óleo FO-010</small></div>
+   <div class="alert">1 peça abaixo do mínimo<small>Pastilha de freio dianteira</small></div>
+   <div class="alert">3 agendamentos hoje<small>Marcos Silva, Ana Souza, Lúcia Ramos</small></div>
+   <div class="alert">2 OS atrasadas<small>#1035, #1037</small></div></div>
+  <div class="box"><h2>Atividade recente</h2><div class="feed">
+   <div>Fatura FAT-203 enviada para Transportes Lima <small>17/09</small></div>
+   <div>OS #1039 de Carla Dias concluída <small>15/09</small></div>
+   <div>Pagamento de R$ 50,00 recebido de Marcos Silva <small>16/09</small></div>
+   <div>OS #1041 aguardando peça <small>17/09</small></div></div></div>
+ </div>`,
+
+cliente:()=> note("cliente","Ficha do cliente: dados, veículos e histórico de OS numa só tela.")+`
+ <div class="head"><h1>Marcos Silva</h1><div class="filters"><span class="btn sec">Editar</span><span class="btn" data-go="osd">Nova OS para este cliente</span></div></div>
+ <div class="box"><h2>Dados do cliente</h2><div class="form">
+  <div><label>Nome</label><div class="input">Marcos Silva</div></div><div><label>Telefone / WhatsApp</label><div class="input">(15) 99999-0000</div></div>
+  <div><label>E-mail</label><div class="input">marcos@email.com</div></div><div><label>CPF / CNPJ</label><div class="input">000.000.000-00</div></div>
+  <div class="full"><label>Observações</label><div class="input">—</div></div></div></div>
+ <div class="box"><div class="head" style="margin-bottom:10px"><h2 style="margin:0">Veículos</h2><span class="btn sec" data-modal="veiculos">Adicionar veículo</span></div>
+  ${table(["Placa","Marca / modelo","Ano","Km"],[["ABC1D23","VW Gol 1.0","2018","84.200"],["XYZ9W87","Fiat Toro","2021","41.000"]])}</div>
+ <div class="box"><h2>Histórico de OS</h2>${table(["OS","Data","Veículo","Valor","Status"],[["#1042","18/09/2026","ABC1D23","R$ 640,00","§Em andamento"],["#0987","02/07/2026","XYZ9W87","R$ 1.120,00","§Concluída"]],"osd")}</div>`,
+
+osd:()=> note("osd","Coração do sistema. Fluxo: cliente → veículo → itens do catálogo (preço automático, editável) → status → pagamento. Na V2 ganha: mecânico, horas, impressão e envio por WhatsApp.")+`
+ <div class="head"><h1>OS #1042</h1><div class="filters"><span class="btn sec">Imprimir</span><span class="btn sec">Enviar por WhatsApp</span><span class="btn">Salvar</span></div></div>
+ <div class="box"><h2>Status</h2><div class="steps"><span>Orçamento</span><span>Aguardando aprovação</span><span class="on">Em andamento</span><span>Aguardando peça</span><span>Concluída</span><span>Entregue</span></div></div>
+ <div class="box"><h2>Cliente e veículo</h2><div class="form">
+  <div><label>Cliente</label><div class="input">Marcos Silva ▾</div></div><div><label>Veículo</label><div class="input">ABC1D23 — VW Gol ▾</div></div>
+  <div><label>Km de entrada</label><div class="input">84.200</div></div><div><label>Previsão de entrega</label><div class="input">20/09/2026</div></div>
+  <div><label>Mecânico responsável (V2)</label><div class="input">João ▾</div></div><div><label>Origem (V2)</label><div class="input">Agendamento ▾</div></div>
+  <div class="full"><label>Relato do cliente / diagnóstico</label><div class="input" style="height:60px">Barulho ao frear…</div></div></div></div>
+ <div class="box"><div class="head" style="margin-bottom:10px"><h2 style="margin:0">Serviços e peças</h2><div class="filters"><span class="btn sec">Adicionar serviço</span><span class="btn sec">Adicionar peça</span></div></div>
+  <div class="scroll"><table><tr><th>Item</th><th>Tipo</th><th>Qtd</th><th>Valor unit.</th><th>Total</th><th></th></tr>
+  <tr><td>Troca de pastilhas dianteiras</td><td>Serviço</td><td>1</td><td>R$ 180,00</td><td>R$ 180,00</td><td><span class="ico">del</span></td></tr>
+  <tr><td>Pastilha de freio (jogo)</td><td>Peça</td><td>1</td><td>R$ 220,00</td><td>R$ 220,00</td><td><span class="ico">del</span></td></tr>
+  <tr><td>Troca de óleo + filtro</td><td>Serviço</td><td>1</td><td>R$ 240,00</td><td>R$ 240,00</td><td><span class="ico">del</span></td></tr></table></div>
+  <div class="totals"><span>Desconto: R$ 0,00</span><b>Total: R$ 640,00</b></div></div>
+ <div class="grid2">
+  <div class="box"><h2>Pagamento</h2><div class="form"><div><label>Forma</label><div class="input">Pix ▾</div></div><div><label>Situação</label><div class="input">Pendente ▾</div></div></div></div>
+  <div class="box"><h2>Horas trabalhadas (V2)</h2>${table(["Mecânico","Estimado","Real"],[["João","1,5 h","1,8 h"]])}</div>
+ </div>`,
+
+agenda:()=> note("agenda","Agenda de entrada de veículos. No dia, o agendamento vira OS com um clique.")+`
+ <div class="head"><div><h1>Agendamentos</h1><div class="sub">Setembro 2026</div></div><div class="filters"><span class="btn sec">Mês ▾</span><span class="btn" data-modal="agenda">Novo agendamento</span></div></div>
+ <div class="box"><div class="cal">${["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"].map(d=>`<div class="h">${d}</div>`).join("")}
+ ${Array.from({length:35},(_,i)=>{const d=i-1;const ev={16:"09h Paulo Reis",18:"10h Lúcia",19:"08h Marcos<span class='ev'>14h Ana</span>",22:"09h Transp. Lima"}[d];return `<div>${d>0&&d<=30?d:""}${ev?`<span class="ev">${ev}</span>`:""}</div>`}).join("")}</div></div>
+ <div class="box"><h2>Hoje</h2>${table(["Hora","Cliente","Veículo","Serviço previsto","Status"],[["08:00","Marcos Silva","ABC1D23","Revisão","§Confirmado"],["14:00","Ana Souza","FGH4I56","Troca de óleo","§Aguardando"]],"osd")}</div>`,
+
+tarefas:()=> note("tarefas","Tarefas internas da oficina (limpeza, compras, retornos) em quadro simples.")+`
+ <div class="head"><h1>Tarefas da oficina</h1><span class="btn" data-modal="tarefas">Nova tarefa</span></div>
+ <div class="kanban">
+  <div class="col"><b>A fazer</b><div class="card">Ligar para cliente sobre orçamento ORC-088<small>Resp.: Bruno · hoje</small></div><div class="card">Calibrar scanner<small>Resp.: João · 22/09</small></div></div>
+  <div class="col"><b>Fazendo</b><div class="card">Organizar prateleira B<small>Resp.: Pedro</small></div></div>
+  <div class="col"><b>Feito</b><div class="card">Conferir pedido PC-030<small>Resp.: Pedro · 16/09</small></div></div>
+ </div>`,
+
+relatorios:()=> note("relatorios","Relatórios prontos para escolher período e exportar (PDF/CSV).")+`
+ <div class="head"><h1>Relatórios</h1><div class="filters"><div class="input">Período: setembro ▾</div></div></div>
+ <div class="grid3">${["Faturamento por período","Lucro (entradas − despesas)","Serviços mais vendidos","Clientes que mais compram","Produtividade por mecânico","Contas a receber","Peças mais usadas","Garantias acionadas","Retorno de lembretes"].map(t=>`<div class="box"><h2>${t}</h2><div class="sub" style="margin-bottom:10px">Resumo do período em tabela.</div><div class="filters"><span class="btn sec">Ver</span><span class="btn sec">Exportar</span></div></div>`).join("")}</div>`,
+
+analises:()=> note("analises","Painel de gráficos para enxergar tendências. Diferente de Relatórios: aqui é visual, lá é tabela exportável.")+`
+ <div class="head"><h1>Análises</h1><div class="input">Últimos 6 meses ▾</div></div>
+ <div class="grid4"><div class="box kpi"><div class="l">Ticket médio</div><div class="v">R$ 384</div></div><div class="box kpi"><div class="l">OS no período</div><div class="v">276</div></div><div class="box kpi"><div class="l">Clientes novos</div><div class="v">41</div></div><div class="box kpi"><div class="l">Margem</div><div class="v">57%</div></div></div>
+ <div class="grid2">
+  <div class="box"><h2>Receita por mês</h2>${bars([30,42,38,55,60,72],["abr","mai","jun","jul","ago","set"])}</div>
+  <div class="box"><h2>Receita por mecânico</h2>${bars([80,64],["João","Pedro"])}</div>
+  <div class="box"><h2>Peças mais usadas</h2>${bars([90,55,40],["Pastilha","Filtro","Óleo"])}</div>
+  <div class="box"><h2>Gasto por fornecedor</h2>${bars([85,35],["Auto Peças","Distrib. Leste"])}</div>
+  <div class="box"><h2>Formas de pagamento</h2><div class="ph" style="height:150px">Rosca: Pix · cartão · dinheiro · boleto</div></div>
+  <div class="box"><h2>Veículos por marca</h2>${bars([70,45,30,20],["VW","Fiat","Hyundai","Outras"])}</div>
+ </div>`,
+
+config:()=> note("config","MVP: dados da oficina (aparecem na OS impressa) e senha. V2: usuários da equipe, categorias, status personalizados e backup.")+`
+ <div class="head"><h1>Configurações</h1><span class="btn">Salvar alterações</span></div>
+ <div class="tabs"><span class="on">Oficina</span><span>Conta e senha</span><span>Usuários (V2)</span><span>Categorias e status (V2)</span><span>Backup (V2)</span></div>
+ <div class="box" style="border-top-left-radius:0"><div class="form">
+  <div class="full"><label>Logo</label><div class="ph" style="height:60px;width:120px">upload</div></div>
+  <div><label>Nome da oficina</label><div class="input">Auto Center Exemplo</div></div><div><label>CNPJ</label><div class="input">00.000.000/0001-00</div></div>
+  <div><label>Telefone / WhatsApp</label><div class="input">(15) 3000-0000</div></div><div><label>E-mail</label><div class="input">contato@oficina.com</div></div>
+  <div class="full"><label>Endereço</label><div class="input">Rua…</div></div>
+  <div><label>Valor hora padrão</label><div class="input">R$ 110,00</div></div><div><label>Garantia padrão</label><div class="input">90 dias</div></div>
+  <div class="full"><label>Texto de rodapé da OS</label><div class="input" style="height:50px">Condições, garantia…</div></div></div></div>
+ <div class="box"><h2>Plano</h2><div class="sub">Plano ativo até 19/10/2026 · gerenciado pela plataforma de pagamento</div></div>`,
+
+guia:()=> note("guia","Ajuda dentro do sistema: passo a passo curto de cada tarefa.")+`
+ <div class="head"><h1>Guia de uso</h1><div class="input" style="width:260px">Buscar na ajuda…</div></div>
+ <div class="box guide">${[["Primeiros passos","Configure os dados da oficina, cadastre seus serviços com preço padrão e depois os clientes."],["Como abrir uma ordem de serviço","Clique em Nova OS, escolha cliente e veículo, adicione os itens e salve."],["Como mudar o status de uma OS","Dentro da OS, clique na etapa desejada na barra de status."],["Como registrar um pagamento","Na OS, escolha a forma de pagamento e marque como pago."],["Como exportar meus dados","Em cada lista, use Exportar CSV."]].map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join("")}</div>`
+};
+
+const MODALS = {agenda:["Cliente ▾","Veículo ▾","Data","Hora","Serviço previsto"],tarefas:["Tarefa","Responsável ▾","Prazo"]};
+
+/* ============ MONTAGEM ============ */
+function side(active){
+  return `<aside class="side"><div class="logo" data-go="dash"><div class="ph">L</div><div><b style="font-size:13px">Nome da oficina</b><div style="font-size:11px;color:#aaa">Gestão da oficina</div></div></div>
+  ${MENU.map(([g,ids])=>`<div class="navgroup">${g}</div>${ids.map(id=>`<span class="navi ${id===active?"on":""}" data-go="${id}"><span>${navName(id)}</span>${L[id]&&L[id].n?`<span class="n">${L[id].n}</span>`:""}</span>`).join("")}`).join("")}
+  <div style="font-size:11px;color:#888;margin:16px 10px 0">Sair</div></aside>`;
+}
+function appPage(id,navActive){
+  const body = L[id]?listPage(id):CUSTOM[id]();
+  return `<section class="page" id="${id}"><div class="app">${side(navActive||id)}<div class="main">
+   <div class="top"><div class="input">Buscar cliente, placa, OS…</div><div class="r"><span class="ico">notif.</span><span class="ico">tema</span><div class="ph" style="width:30px;height:30px;border-radius:50%">U</div></div></div>
+   <div class="content">${body}</div></div></div></section>`;
+}
+
+const landing = `<section class="page land" id="landing">
+ <div style="padding:14px 32px 0"><div class="note"><span class="tag mvp">MVP</span>Página institucional: explica o sistema e leva para o checkout (Zuptos). Pode ser uma página só, sem sidebar.</div></div>
+ <header><div class="ph" style="width:120px;height:34px">Logo</div><nav><span>Funcionalidades</span><span>Como funciona</span><span>Preço</span><span>Dúvidas</span></nav><div class="filters"><span class="btn sec" data-go="login">Entrar</span><span class="btn">Assinar</span></div></header>
+ <div class="hero"><div><h1>Título: o benefício principal para o dono da oficina</h1><p class="sub" style="font-size:14px;margin-bottom:16px">Subtítulo em uma frase: o que o sistema organiza.</p><div class="filters"><span class="btn">Assinar agora</span><span class="btn sec">Ver como funciona</span></div></div><div class="ph" style="height:260px">Print do dashboard</div></div>
+ <div class="sec"><h2>Funcionalidades</h2><div class="grid3">${["Ordens de serviço","Clientes e veículos","Catálogo de serviços","Agenda","Estoque de peças","Financeiro"].map(t=>`<div class="box"><div class="ph" style="height:40px;width:40px;margin-bottom:8px">ícone</div><b>${t}</b><div class="sub">Uma frase sobre o benefício.</div></div>`).join("")}</div></div>
+ <div class="sec"><h2>Como funciona</h2><div class="grid3">${["Assine","Receba o acesso por e-mail","Cadastre e comece a usar"].map((t,i)=>`<div class="box"><b>${i+1}. ${t}</b><div class="sub">Explicação curta.</div></div>`).join("")}</div></div>
+ <div class="sec"><h2>Preço</h2><div class="box" style="max-width:360px"><div class="sub">Plano único</div><div style="font-size:28px;font-weight:700;margin:6px 0">R$ XX/mês</div><div class="sub" style="margin-bottom:12px">Lista do que está incluso</div><span class="btn">Assinar</span></div></div>
+ <div class="sec"><h2>Dúvidas frequentes</h2><div class="box guide">${["Preciso instalar algo?","Funciona no celular?","Meus dados ficam seguros?","Posso cancelar quando quiser?"].map(q=>`<details><summary>${q}</summary><p>Resposta curta.</p></details>`).join("")}</div></div>
+ <footer>Rodapé: contato, termos de uso, política de privacidade</footer></section>`;
+
+const login = `<section class="page" id="login"><div class="login"><div class="box">
+ <div class="note"><span class="tag mvp">MVP</span>A conta é criada automaticamente após o pagamento, e o acesso chega por e-mail.</div>
+ <div class="ph" style="height:48px">Logo</div><h1>Entrar</h1><div class="input">E-mail</div><div class="input">Senha</div>
+ <span class="btn" data-go="dash" style="text-align:center">Entrar</span><a href="#" style="font-size:12px;text-align:center;color:inherit">Esqueci a senha</a></div></div></section>`;
+
+const all = MENU.flatMap(([,ids])=>ids);
+document.getElementById("root").innerHTML = landing + login + all.map(id=>appPage(id)).join("") + appPage("cliente","clientes") + appPage("osd","os");
+
+function go(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.toggle("on",p.id===id));
+  const grp = id==="landing"?"landing":id==="login"?"login":"dash";
+  document.querySelectorAll(".mapbar button").forEach(b=>b.classList.toggle("on",b.dataset.go===grp));
+  document.body.classList.toggle("inapp",grp==="dash");
+  window.scrollTo(0,0);
+}
+function openModal(id){
+  const f = (L[id]&&L[id].fields) || MODALS[id] || ["Campo 1","Campo 2"];
+  const title = L[id]?L[id].btn:(id==="agenda"?"Novo agendamento":"Nova tarefa");
+  document.getElementById("mtitle").textContent = title;
+  document.getElementById("msave").textContent = "Salvar";
+  document.getElementById("mform").innerHTML = f.map(x=>`<div class="${f.length%2&&x===f[f.length-1]?"full":""}"><label>${x.replace(" ▾","")}</label><div class="input">${x.includes("▾")?"Selecione ▾":""}&nbsp;</div></div>`).join("");
+  document.getElementById("modal").style.display="flex";
+}
+document.addEventListener("click",e=>{
+  const g=e.target.closest("[data-go]"); if(g){e.preventDefault();go(g.dataset.go);return}
+  const m=e.target.closest("[data-modal]"); if(m){openModal(m.dataset.modal);return}
+  if(e.target.closest("[data-close]")||e.target.id==="modal") document.getElementById("modal").style.display="none";
+});
+go("dash");
+</script>
+</body>
+</html>

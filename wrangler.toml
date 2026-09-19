@@ -1,0 +1,9 @@
+name = "sistema-oficina"
+pages_build_output_dir = "./public"
+compatibility_date = "2026-09-01"
+
+# Banco D1: troque database_id pelo ID do banco criado na Cloudflare
+[[d1_databases]]
+binding = "DB"
+database_name = "oficina-db"
+database_id = "COLE-AQUI-O-ID-DO-BANCO"
